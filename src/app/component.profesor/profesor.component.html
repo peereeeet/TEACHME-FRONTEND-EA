@@ -1,0 +1,64 @@
+<div class="profesor-container">
+  <h2>Gestión de Profesores</h2>
+
+  <div class="form-group">
+    <label for="nombre">Nombre:</label>
+    <input type="text" id="nombre" [(ngModel)]="profesor.nombre" placeholder="Ingrese el nombre">
+  </div>
+  <div class="form-group">
+    <label for="edad">Edad:</label>
+    <input type="number" id="edad" [(ngModel)]="profesor.edad" placeholder="Ingrese la edad">
+  </div>
+  
+  <button class="btn btn-primary" (click)="crearProfesor(profesor.nombre, profesor.edad)">Crear Profesor</button>
+
+  <hr>
+
+  <h3>Listar Profesores</h3>
+  <button class="btn btn-secondary" (click)="listarProfesores()">Listar Profesores</button>
+  <div *ngFor="let p of profesores">
+    <p>{{ p.nombre }} (Edad: {{ p.edad }})</p> <!-- Verifica que 'id' esté correctamente referenciado -->
+    <button class="btn btn-info" (click)="verProfesorPorNombre(p.nombre)">Ver</button>
+    <button class="btn btn-danger" (click)="borrarProfesor(p.nombre)">Borrar</button>
+    <button class="btn btn-warning" (click)="prepararActualizarProfesor(p)">Actualizar</button> <!-- Botón para preparar actualización -->
+  </div>
+
+  <hr>
+
+  <h3>Actualizar Profesor</h3>
+  <div class="form-group">
+    <label for="nuevoNombre">Nuevo Nombre:</label>
+    <input type="text" id="nuevoNombre" [(ngModel)]="profesor.nombre" placeholder="Ingrese el nuevo nombre">
+  </div>
+  <div class="form-group">
+    <label for="nuevaEdad">Nueva Edad:</label>
+    <input type="number" id="nuevaEdad" [(ngModel)]="profesor.edad" placeholder="Ingrese la nueva edad">
+  </div>
+  <button class="btn btn-success" (click)="actualizarProfesor(profesor._id, profesor.nombre, profesor.edad)">Actualizar Profesor</button>
+
+  <hr>
+
+  <h3>Asignar Asignaturas</h3>
+  <div class="form-group">
+    <label for="nombreProfesor">Nombre del Profesor:</label>
+    <input type="text" id="nombreProfesor" #nombreProfesor placeholder="Ingrese el nombre del profesor">
+  </div>
+  <div class="form-group">
+    <label for="asignaturas">Asignaturas (separadas por comas):</label>
+    <input type="text" id="asignaturas" #nombresAsignaturas placeholder="Ingrese las asignaturas">
+  </div>
+  <button class="btn btn-warning" (click)="asignarAsignaturasAProfesor(nombreProfesor.value, nombresAsignaturas.value.split(','))">Asignar Asignaturas</button>
+  
+  <hr>
+
+  <h3>Borrar Asignatura</h3>
+  <div class="form-group">
+    <label for="nombreProfesorBorrar">Nombre del Profesor:</label>
+    <input type="text" id="nombreProfesorBorrar" #nombreProfesorBorrar placeholder="Ingrese el nombre del profesor">
+  </div>
+  <div class="form-group">
+    <label for="nombreAsignatura">Nombre de la Asignatura:</label>
+    <input type="text" id="nombreAsignatura" #nombreAsignatura placeholder="Ingrese la asignatura a borrar">
+  </div>
+  <button class="btn btn-danger" (click)="borrarAsignaturaDeProfesor(nombreProfesorBorrar.value, nombreAsignatura.value)">Borrar Asignatura</button>
+</div>

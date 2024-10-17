@@ -1,0 +1,103 @@
+.profesor-container {
+    max-width: 800px; /* Ancho máximo del contenedor */
+    margin: 40px auto; /* Centrar el contenedor */
+    padding: 20px; /* Espaciado interno */
+    border: 1px solid #ccc; /* Borde ligero */
+    border-radius: 8px; /* Bordes redondeados */
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1); /* Sombra para profundidad */
+    background-color: #f0f8ff; /* Color de fondo suave */
+}
+
+h2, h3 {
+    color: #333; /* Color del texto */
+    margin-bottom: 10px; /* Espaciado inferior */
+    text-align: center; /* Centrar títulos */
+}
+
+.form-group {
+    margin-bottom: 15px; /* Espaciado inferior entre grupos de formulario */
+}
+
+label {
+    display: block; /* Hacer que las etiquetas ocupen una línea completa */
+    font-weight: bold; /* Resaltar las etiquetas */
+    margin-bottom: 5px; /* Espaciado inferior */
+}
+
+input[type="text"], 
+input[type="number"] {
+    width: 100%; /* Ancho completo */
+    padding: 8px; /* Espaciado interno */
+    border: 1px solid #ccc; /* Borde ligero */
+    border-radius: 4px; /* Bordes redondeados */
+    box-sizing: border-box; /* Incluir padding y border en el tamaño total */
+    transition: border-color 0.3s; /* Transición suave para el borde */
+}
+
+input[type="text"]:focus, 
+input[type="number"]:focus {
+    border-color: #007bff; /* Color del borde al enfocar */
+    outline: none; /* Eliminar el contorno */
+}
+
+button {
+    padding: 10px 15px; /* Espaciado interno */
+    border: none; /* Sin borde */
+    border-radius: 4px; /* Bordes redondeados */
+    cursor: pointer; /* Cambiar cursor al pasar el ratón */
+    transition: background-color 0.3s; /* Transición suave para el color de fondo */
+    display: block; /* Hacer que los botones ocupen su propia línea */
+    margin: 10px auto; /* Centrar botones */
+    width: 80%; /* Ancho de los botones */
+}
+
+.btn-primary {
+    background-color: #007bff; /* Color de fondo del botón primario */
+    color: white; /* Color del texto */
+}
+
+.btn-primary:hover {
+    background-color: #0056b3; /* Color de fondo al pasar el ratón */
+}
+
+.btn-secondary {
+    background-color: #6c757d; /* Color de fondo del botón secundario */
+    color: white; /* Color del texto */
+}
+
+.btn-secondary:hover {
+    background-color: #5a6268; /* Color de fondo al pasar el ratón */
+}
+
+.btn-info {
+    background-color: #17a2b8; /* Color de fondo del botón info */
+    color: white; /* Color del texto */
+}
+
+.btn-info:hover {
+    background-color: #138496; /* Color de fondo al pasar el ratón */
+}
+
+.btn-danger {
+    background-color: #dc3545; /* Color de fondo del botón peligro */
+    color: white; /* Color del texto */
+}
+
+.btn-danger:hover {
+    background-color: #c82333; /* Color de fondo al pasar el ratón */
+}
+
+.btn-warning {
+    background-color: #ffc107; /* Color de fondo del botón advertencia */
+    color: black; /* Color del texto */
+}
+
+.btn-warning:hover {
+    background-color: #e0a800; /* Color de fondo al pasar el ratón */
+}
+
+hr {
+    margin: 20px 0; /* Espaciado superior e inferior */
+    border: 0; /* Sin borde */
+    border-top: 1px solid #ccc; /* Borde superior */
+}
