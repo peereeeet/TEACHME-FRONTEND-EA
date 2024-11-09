@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { Profesor } from './models/profesor.model';
+import { Asignatura } from './models/asignatura.models';
 
 
 @Injectable({
@@ -54,5 +55,31 @@ export class ApiService {
 actualizarProfesorPorId(id: string, profesor: Profesor): Observable<Profesor> {
   return this.http.put<Profesor>(`${this.apiUrl}api/profesores/${id}`, profesor);
 }
+///////////////////////////////////////// CRUD DE ASIGNATURAS ///////////////////////////////////////
 
+  // Obtener todas las asignaturas
+  listarAsignaturas(): Observable<Asignatura[]> {
+    return this.http.get<Asignatura[]>(`${this.apiUrl}api/asignaturas`);
+  }
+
+  // Crear una nueva asignatura
+  crearAsignatura(asignatura: Asignatura): Observable<Asignatura> {
+    return this.http.post<Asignatura>(`${this.apiUrl}api/asignaturas`, asignatura);
+  }
+
+  // Obtener una asignatura por ID
+  obtenerAsignaturaPorId(id: string): Observable<Asignatura> {
+    return this.http.get<Asignatura>(`${this.apiUrl}api/asignaturas/${id}`);
+  }
+
+  // Actualizar una asignatura por ID
+  actualizarAsignatura(id: string, asignatura: Asignatura): Observable<Asignatura> {
+    return this.http.put<Asignatura>(`${this.apiUrl}api/asignaturas/${id}`, asignatura);
+  }
+
+  // Eliminar una asignatura por ID
+  borrarAsignatura(id: string): Observable<void> {
+    return this.http.delete<void>(`${this.apiUrl}api/asignaturas/${id}`);
+  }
 }
+

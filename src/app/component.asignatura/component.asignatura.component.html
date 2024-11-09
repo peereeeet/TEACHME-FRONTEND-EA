@@ -1,0 +1,39 @@
+<p><div>
+    <h2>Gestión de Asignaturas</h2>
+  
+    <!-- Formulario -->
+    <form (ngSubmit)="asignatura._id ? actualizarAsignatura() : crearAsignatura()">
+      <input
+        type="text"
+        [(ngModel)]="asignatura.nombre"
+        name="nombre"
+        placeholder="Nombre"
+        required
+      />
+      <input
+        type="text"
+        [(ngModel)]="asignatura.descripcion"
+        name="descripcion"
+        placeholder="Descripción"
+        required
+      />
+      <input
+        type="number"
+        [(ngModel)]="asignatura.creditos"
+        name="creditos"
+        placeholder="Créditos"
+        required
+      />
+      <button type="submit">{{ asignatura._id ? 'Actualizar' : 'Crear' }}</button>
+    </form>
+  
+    <!-- Listado -->
+    <ul>
+      <li *ngFor="let asignatura of asignaturas">
+        {{ asignatura.nombre }} - {{ asignatura.descripcion }} - {{ asignatura.creditos }} créditos
+        <button (click)="prepararActualizarAsignatura(asignatura)">Editar</button>
+        <button (click)="borrarAsignatura(asignatura._id)">Eliminar</button>
+      </li>
+    </ul>
+  </div>
+  

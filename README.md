@@ -1,4 +1,4 @@
-# Repo Frontend Grup 4 de EA Q1 2024-25 --> TeachMe
+# Frontend
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 18.2.8.
 
