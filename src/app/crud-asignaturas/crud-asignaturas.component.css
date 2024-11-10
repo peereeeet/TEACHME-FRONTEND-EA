@@ -1,0 +1,125 @@
+body {
+    background-color: #2c3e50; /* Fondo oscuro para toda la página */
+    color: #ecf0f1;
+    font-family: Arial, sans-serif;
+  }
+  
+  .crud-container {
+    max-width: 800px;
+    margin: 20px auto;
+    padding: 20px;
+    background-color: #34495e; /* Azul oscuro suave */
+    border-radius: 10px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+  }
+  
+  h2 {
+    text-align: center;
+    color: #ecf0f1; /* Blanco suave */
+    font-weight: 700;
+    margin-bottom: 20px;
+    font-size: 1.8rem;
+  }
+  
+  .form-group {
+    margin-bottom: 15px;
+  }
+  
+  label {
+    display: block;
+    font-weight: 600;
+    color: #bdc3c7; /* Gris claro */
+    margin-bottom: 5px;
+  }
+  
+  input[type="text"], .form-control {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #7f8c8d;
+    border-radius: 5px;
+    background-color: #2c3e50; /* Fondo oscuro para inputs */
+    color: #ecf0f1;
+    box-sizing: border-box;
+  }
+  
+  .table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+    border-radius: 10px;
+    overflow: hidden;
+  }
+  
+  th {
+    background-color: #2980b9; /* Azul oscuro para encabezado */
+    color: white;
+    padding: 12px;
+    text-align: center;
+    font-weight: 600;
+  }
+  
+  td {
+    padding: 10px;
+    border: 1px solid #7f8c8d;
+    text-align: center;
+    color: #ecf0f1;
+    background-color: #3b4a59; /* Fondo oscuro de las celdas */
+  }
+  
+  td ul {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+  }
+  
+  td ul li {
+    background-color: #34495e;
+    padding: 5px;
+    margin: 2px 0;
+    border-radius: 5px;
+  }
+  
+  button {
+    margin-right: 5px;
+    transition: background-color 0.3s ease, transform 0.2s;
+  }
+  
+  button:hover {
+    transform: scale(1.05);
+  }
+  
+  .btn {
+    padding: 8px 12px;
+    font-size: 14px;
+    cursor: pointer;
+    border-radius: 5px;
+    border: none;
+    color: white;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+  }
+  
+  .btn-primary {
+    background-color: #3498db; /* Azul para botón principal */
+  }
+  
+  .btn-primary:hover {
+    background-color: #2980b9;
+  }
+  
+  .btn-danger {
+    background-color: #e74c3c; /* Rojo oscuro */
+  }
+  
+  .btn-danger:hover {
+    background-color: #c0392b;
+  }
+  
+  .alert {
+    padding: 10px;
+    color: #c0392b;
+    background-color: #e74c3c;
+    border: 1px solid #c0392b;
+    border-radius: 5px;
+    margin-top: 10px;
+  }
+  

@@ -1,0 +1,117 @@
+/* Contenedor principal */
+.populate-container {
+    max-width: 600px;
+    margin: 20px auto;
+    padding: 20px;
+    background-color: #2f3e4d; /* Fondo oscuro elegante */
+    border-radius: 10px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+    color: #ffffff;
+  }
+  
+  /* Título */
+  h2 {
+    text-align: center;
+    color: #f0f2f5; /* Color claro para destacar */
+    font-weight: 700;
+    margin-bottom: 20px;
+  }
+  
+  /* Formulario */
+  .form-group {
+    margin-bottom: 20px;
+  }
+  
+  label {
+    font-weight: 600;
+    color: #c5c6c9; /* Color gris suave */
+  }
+  
+  select, .buttons button {
+    width: 100%;
+    padding: 10px;
+    margin-top: 8px;
+    border: 1px solid #455a64;
+    border-radius: 5px;
+    background-color: #37474f; /* Fondo oscuro para inputs */
+    color: #f0f2f5;
+    box-sizing: border-box;
+    transition: background-color 0.3s ease;
+  }
+  
+  select:hover, .buttons button:hover {
+    background-color: #546e7a; /* Efecto hover en inputs */
+  }
+  
+  .buttons {
+    text-align: center;
+    margin-top: 15px;
+  }
+  
+  .buttons button {
+    padding: 10px 20px;
+    font-size: 14px;
+    font-weight: bold;
+    background-color: #5a8dee; /* Azul suave */
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+  
+  .buttons button:hover {
+    background-color: #4a7ddc; /* Azul más intenso en hover */
+  }
+  
+  /* Listado de asignaturas */
+  ul {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+  }
+  
+  ul li {
+    background-color: #455a64; /* Fondo oscuro para items */
+    padding: 10px;
+    margin: 5px 0;
+    border-radius: 5px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    color: #f0f2f5;
+  }
+  
+  ul li:hover {
+    background-color: #546e7a; /* Color en hover */
+  }
+  
+  .btn-small {
+    padding: 5px 10px;
+    font-size: 12px;
+    margin-left: 10px;
+    background-color: #e57373; /* Rojo suave para botón de desasignar */
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+  
+  .btn-small:hover {
+    background-color: #d32f2f; /* Rojo más intenso en hover */
+  }
+  
+  /* Notificación de feedback */
+  .notification {
+    background-color: #4caf50; /* Verde para éxito */
+    color: white;
+    padding: 10px;
+    margin-top: 10px;
+    border-radius: 5px;
+    text-align: center;
+    font-weight: bold;
+    transition: opacity 0.3s ease;
+    opacity: 0.9;
+  }
+  

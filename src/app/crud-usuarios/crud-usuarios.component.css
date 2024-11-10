@@ -1,0 +1,147 @@
+/* Fondo general de la página */
+body {
+  background-color: #1c2a3a !important; /* Fondo oscuro suave para toda la página */
+  color: #cc6666;
+  font-family: Arial, sans-serif;
+}
+
+.crud-container {
+  max-width: 800px;
+  margin: 20px auto;
+  padding: 20px;
+  background-color: #2d3e50; /* Fondo oscuro para el contenedor */
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+h2 {
+  text-align: center;
+  color: #ffffff;
+  font-weight: 600;
+  margin-bottom: 20px;
+  font-size: 1.8rem;
+}
+
+.form-group {
+  margin-bottom: 15px;
+}
+
+label {
+  display: block;
+  font-weight: 600;
+  color: #c7d4e0;
+  margin-bottom: 5px;
+}
+
+input[type="text"], input[type="number"], input[type="email"], input[type="password"], .form-control {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #556377;
+  border-radius: 5px;
+  background-color: #3f5068; /* Fondo oscuro para inputs */
+  color: #e0e6ed;
+  box-sizing: border-box;
+}
+
+input[type="checkbox"] {
+  margin-right: 8px;
+}
+
+.table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 20px;
+  border-radius: 10px;
+  overflow: hidden;
+}
+
+th {
+  background-color: #4a5b6f; /* Fondo gris oscuro para encabezado */
+  color: #e0e6ed;
+  padding: 12px;
+  text-align: center;
+  font-weight: 600;
+}
+
+td {
+  padding: 10px;
+  border: 1px solid #556377;
+  text-align: center;
+  color: #d1d8e0;
+}
+
+td ul {
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+}
+
+td ul li {
+  background-color: #556377;
+  color: #e0e6ed;
+  padding: 5px;
+  margin: 2px 0;
+  border-radius: 5px;
+}
+
+button {
+  margin-right: 5px;
+}
+
+.btn {
+  padding: 8px 12px;
+  font-size: 14px;
+  cursor: pointer;
+  border-radius: 5px;
+  transition: background-color 0.3s ease;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+}
+
+.btn-primary {
+  background-color: #5a8dee; /* Azul suave */
+  color: white;
+  border: none;
+}
+
+.btn-primary:hover {
+  background-color: #4a7ddc;
+}
+
+.btn-warning {
+  background-color: #f0ad4e; /* Amarillo suave */
+  color: white;
+  border: none;
+}
+
+.btn-warning:hover {
+  background-color: #eb9c32;
+}
+
+.btn-danger {
+  background-color: #e57373; /* Rojo suave */
+  color: white;
+  border: none;
+}
+
+.btn-danger:hover {
+  background-color: #d9534f;
+}
+
+.btn-secondary {
+  background-color: #778899; /* Gris medio */
+  color: white;
+  border: none;
+}
+
+.btn-secondary:hover {
+  background-color: #6c7a89;
+}
+
+.alert {
+  padding: 10px;
+  color: #f8d7da;
+  background-color: #721c24; /* Fondo oscuro de alerta */
+  border: 1px solid #f5c6cb;
+  border-radius: 5px;
+  margin-top: 10px;
+}

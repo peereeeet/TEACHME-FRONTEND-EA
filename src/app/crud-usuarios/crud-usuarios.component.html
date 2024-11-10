@@ -1,0 +1,88 @@
+<div class="crud-container">
+  <h2>Gestión de Usuarios</h2>
+
+  <!-- Formulario para agregar/editar usuario -->
+  <form (ngSubmit)="submitForm()" #userForm="ngForm">
+    <div class="form-group">
+      <label for="nombre">Nombre:</label>
+      <input [(ngModel)]="user.nombre" name="nombre" required placeholder="Nombre" class="form-control">
+    </div>
+    <div class="form-group">
+      <label for="edad">Edad:</label>
+      <input [(ngModel)]="user.edad" name="edad" required type="number" placeholder="Edad" class="form-control">
+    </div>
+    <div class="form-group">
+      <label for="email">Email:</label>
+      <input [(ngModel)]="user.email" name="email" required type="email" placeholder="Email" class="form-control">
+    </div>
+    <div class="form-group">
+      <label for="password">Contraseña:</label>
+      <input [(ngModel)]="user.password" name="password" required type="password" placeholder="Contraseña" class="form-control">
+      <!-- Muestra el mensaje de error si la contraseña es demasiado corta -->
+      <div *ngIf="passwordErrorMessage" class="alert alert-danger">
+        {{ passwordErrorMessage }}
+      </div>
+    </div>
+    <div class="form-group">
+      <label for="confirmPassword">Confirmar Contraseña:</label>
+      <input [(ngModel)]="confirmPassword" name="confirmPassword" required type="password" placeholder="Confirmar Contraseña" class="form-control">
+    </div>
+    <div *ngIf="user.password !== confirmPassword && confirmPassword" class="alert alert-danger">
+      Las contraseñas no coinciden.
+    </div>
+    <div class="form-group">
+      <label for="isProfesor">Es Profesor:</label>
+      <input [(ngModel)]="user.isProfesor" name="isProfesor" type="checkbox">
+    </div>
+    <div class="form-group">
+      <label for="isAlumno">Es Alumno:</label>
+      <input [(ngModel)]="user.isAlumno" name="isAlumno" type="checkbox">
+    </div>
+    <div class="form-group">
+      <label for="isAdmin">Es Administrador:</label>
+      <input [(ngModel)]="user.isAdmin" name="isAdmin" type="checkbox">
+    </div>
+
+    <button type="submit" class="btn btn-primary" [disabled]="user.password !== confirmPassword || !userForm.valid">
+      {{ isEditMode ? 'Actualizar' : 'Agregar' }} Usuario
+    </button>
+    <button type="button" class="btn btn-secondary" (click)="resetForm()" *ngIf="isEditMode">Cancelar</button>
+  </form>
+
+  <!-- Tabla de usuarios -->
+  <table class="table">
+    <thead>
+      <tr>
+        <th>Nombre</th>
+        <th>Edad</th>
+        <th>Email</th>
+        <th>Profesor</th>
+        <th>Alumno</th>
+        <th>Administrador</th>
+        <th>Asignaturas</th>
+        <th>Acciones</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let usuario of usuarios">
+        <td>{{ usuario.nombre }}</td>
+        <td>{{ usuario.edad }}</td>
+        <td>{{ usuario.email }}</td>
+        <td>{{ usuario.isProfesor ? 'Sí' : 'No' }}</td>
+        <td>{{ usuario.isAlumno ? 'Sí' : 'No' }}</td>
+        <td>{{ usuario.isAdmin ? 'Sí' : 'No' }}</td>
+        <td>
+          <ul>
+            <li *ngFor="let asignatura of usuario.asignaturasImparte">
+              {{ asignatura.nombre }}
+            </li>
+          </ul>
+        </td>
+        <td>
+          <button class="btn btn-warning" (click)="editUsuario(usuario)">Editar</button>
+          <button class="btn btn-danger" (click)="deleteUsuario(usuario._id)">Eliminar</button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>
