@@ -1,40 +1,46 @@
 <div class="crud-container">
-    <h2>Gestión de Asignaturas</h2>
-  
-    <!-- Formulario para agregar asignatura -->
-    <form (ngSubmit)="submitForm()" #asignaturaForm="ngForm">
-      <div class="form-group">
-        <label for="nombre">Nombre:</label>
-        <input [(ngModel)]="asignatura.nombre" name="nombre" required placeholder="Nombre" class="form-control">
-      </div>
-      <div class="form-group">
-        <label for="descripcion">Descripción:</label>
-        <input [(ngModel)]="asignatura.descripcion" name="descripcion" placeholder="Descripción" class="form-control">
-      </div>
-  
-      <button type="submit" class="btn btn-primary" [disabled]="!asignaturaForm.valid">
-        Agregar Asignatura
-      </button>
-    </form>
-  
-    <!-- Tabla de asignaturas -->
-    <table class="table">
-      <thead>
-        <tr>
-          <th>Nombre</th>
-          <th>Descripción</th>
-          <th>Acciones</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr *ngFor="let asignatura of asignaturas">
-          <td>{{ asignatura.nombre }}</td>
-          <td>{{ asignatura.descripcion }}</td>
-          <td>
-            <button class="btn btn-danger" (click)="deleteAsignatura(asignatura._id)">Eliminar</button>
-          </td>
-        </tr>
-      </tbody>
-    </table>
+  <h2>Gestión de Asignaturas</h2>
+
+  <!-- Formulario para agregar asignatura -->
+  <form (ngSubmit)="submitForm()" #asignaturaForm="ngForm">
+    <div class="form-group">
+      <label for="nombre">Nombre:</label>
+      <input [(ngModel)]="asignatura.nombre" name="nombre" required placeholder="Nombre" class="form-control">
+    </div>
+    <div class="form-group">
+      <label for="descripcion">Descripción:</label>
+      <input [(ngModel)]="asignatura.descripcion" name="descripcion" placeholder="Descripción" class="form-control">
+    </div>
+
+    <button type="submit" class="btn btn-primary" [disabled]="!asignaturaForm.valid">
+      Agregar Asignatura
+    </button>
+  </form>
+
+  <!-- Tabla de asignaturas -->
+  <table class="table">
+    <thead>
+      <tr>
+        <th>Nombre</th>
+        <th>Descripción</th>
+        <th>Acciones</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let asignatura of asignaturas">
+        <td>{{ asignatura.nombre }}</td>
+        <td>{{ asignatura.descripcion }}</td>
+        <td>
+          <button class="btn btn-danger" (click)="deleteAsignatura(asignatura._id)">Eliminar</button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+
+  <!-- Controles de paginación -->
+  <div class="pagination-controls">
+    <button class="btn btn-secondary" (click)="goToPage(page - 1)" [disabled]="page === 1">Anterior</button>
+    <span>Página {{ page }} de {{ totalPages }}</span>
+    <button class="btn btn-secondary" (click)="goToPage(page + 1)" [disabled]="page === totalPages">Siguiente</button>
   </div>
-  
+</div>

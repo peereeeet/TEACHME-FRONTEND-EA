@@ -13,6 +13,10 @@ import { CommonModule } from '@angular/common';
 })
 export class CrudUsuariosComponent implements OnInit {
   usuarios: Usuario[] = [];
+  page: number = 1;
+  limit: number = 5;
+  totalPages: number = 1;
+
   user: Usuario = { 
     _id: '', 
     nombre: '', 
@@ -35,7 +39,27 @@ export class CrudUsuariosComponent implements OnInit {
   }
 
   loadUsuarios() {
-    this.apiService.getUsuarios().subscribe(data => this.usuarios = data);
+    this.apiService.getUsuariosPaginados(this.page, this.limit).subscribe((data) => {
+      console.log('Datos recibidos:', data); // <-- Añade este console.log
+      this.usuarios = data.usuarios;
+      this.totalPages = data.totalPages;
+    }, (error) => {
+      console.error('Error al cargar usuarios:', error);
+    });
+  }
+
+  nextPage() {
+    if (this.page < this.totalPages) {
+      this.page++;
+      this.loadUsuarios();
+    }
+  }
+
+  previousPage() {
+    if (this.page > 1) {
+      this.page--;
+      this.loadUsuarios();
+    }
   }
 
   submitForm() {
@@ -46,12 +70,11 @@ export class CrudUsuariosComponent implements OnInit {
       return;
     }
 
-    // Validación de longitud de contraseña
     if (this.user.password.length < 7) {
       this.passwordErrorMessage = "La contraseña debe tener al menos 7 caracteres.";
       return;
     } else {
-      this.passwordErrorMessage = ''; // Resetea el mensaje de error si la longitud es válida
+      this.passwordErrorMessage = '';
     }
 
     if (!this.isEditMode && (!this.user.nombre || !this.user.edad || !this.user.email || !this.user.password || this.user.password !== this.confirmPassword)) {
@@ -91,6 +114,6 @@ export class CrudUsuariosComponent implements OnInit {
     };
     this.confirmPassword = ''; 
     this.isEditMode = false;
-    this.passwordErrorMessage = ''; // Resetea el mensaje de error
+    this.passwordErrorMessage = '';
   }
 }

@@ -18,8 +18,11 @@ export class PopulateComponent implements OnInit {
   selectedUsuarioId: string = '';
   selectedAsignaturaId: string = '';
   asignaturasAsignadas: Asignatura[] = [];
-  feedbackMessage: string = ''; // Mensaje de notificación
+  feedbackMessage: string = '';
   showNotification: boolean = false;
+  page = 1;
+  limit = 3;
+  totalPages = 1;
 
   constructor(private apiService: ApiService) {}
 
@@ -37,11 +40,18 @@ export class PopulateComponent implements OnInit {
   }
 
   onUsuarioChange() {
+    this.page = 1; // Reinicia la página al cambiar de usuario
+    this.loadUsuarioAsignaturas();
+  }
+
+  loadUsuarioAsignaturas() {
     if (this.selectedUsuarioId) {
-      this.apiService.getUsuarioAsignaturas(this.selectedUsuarioId).subscribe((data) => {
-        this.asignaturasAsignadas = data;
-        this.clearNotification(); // Limpia la notificación al cambiar de usuario
-      });
+      this.apiService.getUsuarioAsignaturasPaginadas(this.selectedUsuarioId, this.page, this.limit)
+        .subscribe((data) => {
+          this.asignaturasAsignadas = data.asignaturas;
+          this.totalPages = data.totalPages;
+          this.clearNotification();
+        });
     } else {
       this.asignaturasAsignadas = [];
       this.clearNotification();
@@ -57,28 +67,37 @@ export class PopulateComponent implements OnInit {
       if (asignaturaYaAsignada) {
         this.showFeedback('La asignatura ya estaba previamente asignada a este usuario.');
       } else {
-        this.apiService.asignarAsignatura(this.selectedUsuarioId, this.selectedAsignaturaId).subscribe(() => {
-          this.onUsuarioChange();
-          this.showFeedback('Asignatura asignada con éxito.');
-          this.selectedAsignaturaId = '';
-        });
+        this.apiService.asignarAsignatura(this.selectedUsuarioId, this.selectedAsignaturaId)
+          .subscribe(() => {
+            this.loadUsuarioAsignaturas();
+            this.showFeedback('Asignatura asignada con éxito.');
+            this.selectedAsignaturaId = '';
+          });
       }
     }
   }
 
   desasignarAsignatura(asignaturaId: string) {
     if (this.selectedUsuarioId && asignaturaId) {
-      this.apiService.desasignarAsignatura(this.selectedUsuarioId, asignaturaId).subscribe(() => {
-        this.onUsuarioChange();
-        this.showFeedback('Asignatura desasignada con éxito.');
-      });
+      this.apiService.desasignarAsignatura(this.selectedUsuarioId, asignaturaId)
+        .subscribe(() => {
+          this.loadUsuarioAsignaturas();
+          this.showFeedback('Asignatura desasignada con éxito.');
+        });
+    }
+  }
+
+  goToPage(page: number) {
+    if (page > 0 && page <= this.totalPages) {
+      this.page = page;
+      this.loadUsuarioAsignaturas();
     }
   }
 
   showFeedback(message: string) {
     this.feedbackMessage = message;
     this.showNotification = true;
-    setTimeout(() => this.clearNotification(), 3000); // Desaparece después de 3 segundos
+    setTimeout(() => this.clearNotification(), 3000);
   }
 
   clearNotification() {

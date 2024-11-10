@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ApiService } from '../api.service';
 import { Asignatura } from '../models/asignatura.model';
-import { FormsModule } from '@angular/forms'; // Importa FormsModule para ngModel
+import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 
 @Component({
@@ -9,11 +9,14 @@ import { CommonModule } from '@angular/common';
   templateUrl: './crud-asignaturas.component.html',
   styleUrls: ['./crud-asignaturas.component.css'],
   standalone: true,
-  imports: [FormsModule, CommonModule] // Asegúrate de incluir FormsModule aquí
+  imports: [FormsModule, CommonModule]
 })
 export class CrudAsignaturasComponent implements OnInit {
   asignaturas: Asignatura[] = [];
   asignatura: Asignatura = { _id: '', nombre: '', descripcion: '', usuarios: [] };
+  page = 1;
+  limit = 3;
+  totalPages = 1;
 
   constructor(private apiService: ApiService) {}
 
@@ -22,7 +25,10 @@ export class CrudAsignaturasComponent implements OnInit {
   }
 
   loadAsignaturas() {
-    this.apiService.getAsignaturas().subscribe((data) => (this.asignaturas = data));
+    this.apiService.getAsignaturasPaginadas(this.page, this.limit).subscribe((data) => {
+      this.asignaturas = data.asignaturas;
+      this.totalPages = data.totalPages;
+    });
   }
 
   submitForm() {
@@ -38,5 +44,10 @@ export class CrudAsignaturasComponent implements OnInit {
 
   resetForm() {
     this.asignatura = { _id: '', nombre: '', descripcion: '', usuarios: [] };
+  }
+
+  goToPage(page: number) {
+    this.page = page;
+    this.loadAsignaturas();
   }
 }

@@ -1,7 +1,6 @@
 <div class="crud-container">
   <h2>Gestión de Usuarios</h2>
 
-  <!-- Formulario para agregar/editar usuario -->
   <form (ngSubmit)="submitForm()" #userForm="ngForm">
     <div class="form-group">
       <label for="nombre">Nombre:</label>
@@ -18,7 +17,6 @@
     <div class="form-group">
       <label for="password">Contraseña:</label>
       <input [(ngModel)]="user.password" name="password" required type="password" placeholder="Contraseña" class="form-control">
-      <!-- Muestra el mensaje de error si la contraseña es demasiado corta -->
       <div *ngIf="passwordErrorMessage" class="alert alert-danger">
         {{ passwordErrorMessage }}
       </div>
@@ -49,7 +47,6 @@
     <button type="button" class="btn btn-secondary" (click)="resetForm()" *ngIf="isEditMode">Cancelar</button>
   </form>
 
-  <!-- Tabla de usuarios -->
   <table class="table">
     <thead>
       <tr>
@@ -85,4 +82,11 @@
       </tr>
     </tbody>
   </table>
+
+  <!-- Controles de paginación -->
+  <div class="pagination-controls">
+    <button (click)="previousPage()" [disabled]="page === 1">Anterior</button>
+    <span>Página {{ page }} de {{ totalPages }}</span>
+    <button (click)="nextPage()" [disabled]="page === totalPages">Siguiente</button>
+  </div>
 </div>
