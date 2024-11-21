@@ -33,7 +33,7 @@
   <ul *ngIf="asignaturasAsignadas.length > 0">
     <li *ngFor="let asignatura of asignaturasAsignadas">
       {{ asignatura.nombre }}
-      <button (click)="desasignarAsignatura(asignatura._id)" class="btn btn-danger btn-small">Desasignar</button>
+      <button (click)="desasignarAsignatura(asignatura._id || '')" class="btn btn-danger btn-small">Desasignar</button>
     </li>
   </ul>
 

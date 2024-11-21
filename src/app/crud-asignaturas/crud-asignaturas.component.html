@@ -31,7 +31,7 @@
         <td>{{ asignatura.nombre }}</td>
         <td>{{ asignatura.descripcion }}</td>
         <td>
-          <button class="btn btn-danger" (click)="deleteAsignatura(asignatura._id)">Eliminar</button>
+          <button class="btn btn-danger" (click)="deleteAsignatura(asignatura._id || '')">Eliminar</button>
         </td>
       </tr>
     </tbody>

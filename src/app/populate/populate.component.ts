@@ -32,11 +32,15 @@ export class PopulateComponent implements OnInit {
   }
 
   loadUsuarios() {
-    this.apiService.getUsuarios().subscribe((data) => (this.usuarios = data));
+    this.apiService.getUsuarios().subscribe((data: Usuario[]) => {
+      this.usuarios = data;
+    });
   }
-
+  
   loadAsignaturas() {
-    this.apiService.getAsignaturas().subscribe((data) => (this.asignaturas = data));
+    this.apiService.getAsignaturas().subscribe((data: Asignatura[]) => {
+      this.asignaturas = data;
+    });
   }
 
   onUsuarioChange() {
@@ -46,15 +50,14 @@ export class PopulateComponent implements OnInit {
 
   loadUsuarioAsignaturas() {
     if (this.selectedUsuarioId) {
-      this.apiService.getUsuarioAsignaturasPaginadas(this.selectedUsuarioId, this.page, this.limit)
-        .subscribe((data) => {
+      this.apiService
+        .getUsuarioAsignaturasPaginadas(this.selectedUsuarioId, this.page, this.limit)
+        .subscribe((data: { asignaturas: Asignatura[]; totalPages: number }) => {
           this.asignaturasAsignadas = data.asignaturas;
           this.totalPages = data.totalPages;
-          this.clearNotification();
         });
     } else {
       this.asignaturasAsignadas = [];
-      this.clearNotification();
     }
   }
 

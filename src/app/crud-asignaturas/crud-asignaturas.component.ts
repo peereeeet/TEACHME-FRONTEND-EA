@@ -13,7 +13,7 @@ import { CommonModule } from '@angular/common';
 })
 export class CrudAsignaturasComponent implements OnInit {
   asignaturas: Asignatura[] = [];
-  asignatura: Asignatura = { _id: '', nombre: '', descripcion: '', usuarios: [] };
+  asignatura: Asignatura = { _id: '', nombre: '', descripcion: '' }; // Sin `usuarios`
   page = 1;
   limit = 3;
   totalPages = 1;
@@ -43,7 +43,7 @@ export class CrudAsignaturasComponent implements OnInit {
   }
 
   resetForm() {
-    this.asignatura = { _id: '', nombre: '', descripcion: '', usuarios: [] };
+    this.asignatura = { _id: '', nombre: '', descripcion: '' }; // Sin `usuarios`
   }
 
   goToPage(page: number) {

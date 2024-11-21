@@ -1,0 +1,89 @@
+/* Contenedor principal */
+.login-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background: linear-gradient(135deg, #ff9a9e, #fad0c4);
+    font-family: 'Poppins', sans-serif;
+  }
+  
+  /* Formulario */
+  form {
+    background: white;
+    padding: 2rem;
+    border-radius: 15px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+    width: 100%;
+    max-width: 400px;
+  }
+  
+  /* Etiquetas y Títulos */
+  form label {
+    display: block;
+    margin-bottom: 0.5rem;
+    font-size: 0.9rem;
+    font-weight: 600;
+    color: #555;
+  }
+  
+  form h1 {
+    text-align: center;
+    font-size: 1.8rem;
+    margin-bottom: 1.5rem;
+    color: #333;
+  }
+  
+  /* Inputs */
+  form input[type="email"],
+  form input[type="password"] {
+    width: 100%;
+    padding: 0.8rem;
+    margin-bottom: 1rem;
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    font-size: 0.9rem;
+    outline: none;
+    transition: all 0.3s;
+  }
+  
+  form input[type="email"]:focus,
+  form input[type="password"]:focus {
+    border-color: #ff9a9e;
+    box-shadow: 0 0 5px rgba(255, 154, 158, 0.5);
+  }
+  
+  /* Botón */
+  form button {
+    width: 100%;
+    padding: 0.8rem;
+    background: linear-gradient(135deg, #ff758c, #ff7eb3);
+    border: none;
+    border-radius: 10px;
+    font-size: 1rem;
+    color: white;
+    cursor: pointer;
+    transition: all 0.3s;
+  }
+  
+  form button:hover {
+    background: linear-gradient(135deg, #ff5a7c, #ff6fa5);
+    box-shadow: 0 3px 10px rgba(255, 90, 124, 0.3);
+  }
+  
+  /* Mensaje de error */
+  p {
+    color: #ff5a7c;
+    font-size: 0.9rem;
+    text-align: center;
+    margin-top: 1rem;
+  }
+  
+  /* Responsividad */
+  @media (max-width: 600px) {
+    form {
+      padding: 1.5rem;
+      width: 90%;
+    }
+  }
+  

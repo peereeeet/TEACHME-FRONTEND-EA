@@ -1,89 +1,92 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpParams } from '@angular/common/http';
+import { HttpClient, HttpParams, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { Usuario } from './models/usuario.model';
 import { Asignatura } from './models/asignatura.model';
 
+
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class ApiService {
   private apiUrl = 'http://localhost:3000/api/';
 
   constructor(private http: HttpClient) {}
 
-  // Método para obtener usuarios paginados
+  private getAuthHeaders(): HttpHeaders {
+    const token = localStorage.getItem('auth-token') || '';
+    console.log('Token enviado en el encabezado:', token); // Log para verificar
+    return new HttpHeaders().set('auth-token', token); // Cambiar a 'auth-token'
+}
+  // Métodos para CRUD de usuarios
+  createUsuario(usuario: Usuario): Observable<Usuario> {
+    const headers = this.getAuthHeaders();
+    return this.http.post<Usuario>(`${this.apiUrl}usuarios`, usuario, { headers });
+  }
+
+  updateUsuario(id: string, usuario: Usuario): Observable<Usuario> {
+    const headers = this.getAuthHeaders();
+    return this.http.put<Usuario>(`${this.apiUrl}usuarios/${id}`, usuario, { headers });
+  }
+
+  deleteUsuario(id: string): Observable<void> {
+    const headers = this.getAuthHeaders();
+    return this.http.delete<void>(`${this.apiUrl}usuarios/${id}`, { headers });
+  }
+
+  // Métodos para CRUD de asignaturas
+  createAsignatura(asignatura: Asignatura): Observable<Asignatura> {
+    const headers = this.getAuthHeaders();
+    return this.http.post<Asignatura>(`${this.apiUrl}asignaturas`, asignatura, { headers });
+  }
+
+  deleteAsignatura(id: string): Observable<void> {
+    const headers = this.getAuthHeaders();
+    return this.http.delete<void>(`${this.apiUrl}asignaturas/${id}`, { headers });
+  }
+// Agrega este método a api.service.ts
+getUsuarios(): Observable<Usuario[]> {
+  const headers = this.getAuthHeaders();
+  return this.http.get<Usuario[]>(`${this.apiUrl}usuarios`, { headers });
+}
+
+// Agrega este método a api.service.ts
+getAsignaturas(): Observable<Asignatura[]> {
+  const headers = this.getAuthHeaders();
+  return this.http.get<Asignatura[]>(`${this.apiUrl}asignaturas`, { headers });
+}
+
+// Agrega este método a api.service.ts
+getUsuarioAsignaturasPaginadas(usuarioId: string, page: number, limit: number): Observable<any> {
+  const headers = this.getAuthHeaders();
+  const params = new HttpParams()
+    .set('page', page.toString())
+    .set('limit', limit.toString());
+  return this.http.get<any>(`${this.apiUrl}usuarios/${usuarioId}/asignaturas/paginacion`, { headers, params });
+}
+
+  // Métodos adicionales que ya existían...
   getUsuariosPaginados(page: number, limit: number): Observable<any> {
     const params = new HttpParams()
       .set('page', page.toString())
       .set('limit', limit.toString());
-    return this.http.get<any>(`${this.apiUrl}usuarios/listar-paginados`, { params });
+    const headers = this.getAuthHeaders();
+    return this.http.get<any>(`${this.apiUrl}usuarios/listar-paginados`, { params, headers });
   }
 
-  // Método para obtener asignaturas paginadas
   getAsignaturasPaginadas(page: number, limit: number): Observable<any> {
-    const params = new HttpParams()
-      .set('page', page.toString())
-      .set('limit', limit.toString());
-    return this.http.get<any>(`${this.apiUrl}asignaturas/paginacion`, { params });
+    const headers = this.getAuthHeaders();
+    return this.http.get<any>(`${this.apiUrl}asignaturas/paginacion`, { headers });
   }
 
-  // Método para obtener asignaturas de un usuario con paginación
-  getUsuarioAsignaturasPaginadas(usuarioId: string, page: number, limit: number): Observable<any> {
-    const params = new HttpParams()
-      .set('page', page.toString())
-      .set('limit', limit.toString());
-    return this.http.get<any>(`${this.apiUrl}usuarios/${usuarioId}/asignaturas/paginacion`, { params });
-  }
-
-  // Métodos para el CRUD de usuarios
-  getUsuarios(): Observable<Usuario[]> {
-    return this.http.get<Usuario[]>(`${this.apiUrl}usuarios`);
-  }
-
-  getUsuario(id: string): Observable<Usuario> {
-    return this.http.get<Usuario>(`${this.apiUrl}usuarios/${id}`);
-  }
-
-  createUsuario(usuario: Usuario): Observable<Usuario> {
-    return this.http.post<Usuario>(`${this.apiUrl}usuarios`, usuario);
-  }
-
-  updateUsuario(id: string, usuario: Usuario): Observable<Usuario> {
-    return this.http.put<Usuario>(`${this.apiUrl}usuarios/${id}`, usuario);
-  }
-
-  deleteUsuario(id: string): Observable<void> {
-    return this.http.delete<void>(`${this.apiUrl}usuarios/${id}`);
-  }
-
-  // Obtener todas las asignaturas
-  getAsignaturas(): Observable<Asignatura[]> {
-    return this.http.get<Asignatura[]>(`${this.apiUrl}asignaturas`);
-  }
-
-  // Crear una nueva asignatura
-  createAsignatura(asignatura: Asignatura): Observable<Asignatura> {
-    return this.http.post<Asignatura>(`${this.apiUrl}asignaturas`, asignatura);
-  }
-
-  // Eliminar una asignatura
-  deleteAsignatura(id: string): Observable<void> {
-    return this.http.delete<void>(`${this.apiUrl}asignaturas/${id}`);
-  }
-
-  // Obtener asignaturas de un usuario
-  getUsuarioAsignaturas(usuarioId: string): Observable<Asignatura[]> {
-    return this.http.get<Asignatura[]>(`${this.apiUrl}usuarios/${usuarioId}/asignaturas`);
-  }
-
-  // Asignar asignatura a un usuario
+  // Métodos para asignar/desasignar asignaturas...
   asignarAsignatura(usuarioId: string, asignaturaId: string): Observable<any> {
-    return this.http.put(`${this.apiUrl}usuarios/${usuarioId}/asignaturas/${asignaturaId}`, {});
+    const headers = this.getAuthHeaders();
+    return this.http.put(`${this.apiUrl}usuarios/${usuarioId}/asignaturas/${asignaturaId}`, {}, { headers });
   }
 
-  // Desasignar asignatura de un usuario
   desasignarAsignatura(usuarioId: string, asignaturaId: string): Observable<any> {
-    return this.http.delete(`${this.apiUrl}usuarios/${usuarioId}/asignaturas/${asignaturaId}`);
+    const headers = this.getAuthHeaders();
+    return this.http.delete(`${this.apiUrl}usuarios/${usuarioId}/asignaturas/${asignaturaId}`, { headers });
   }
 }

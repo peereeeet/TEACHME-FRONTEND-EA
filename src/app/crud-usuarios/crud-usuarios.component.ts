@@ -22,12 +22,13 @@ export class CrudUsuariosComponent implements OnInit {
     nombre: '', 
     edad: 0, 
     email: '', 
-    password: '', 
+    password: '', // Inicializa como cadena vacía
     isProfesor: false, 
     isAlumno: false, 
     isAdmin: false, 
     asignaturasImparte: [] 
   };
+  
   confirmPassword = ''; 
   isEditMode = false;
   passwordErrorMessage = ''; // Mensaje de error para la contraseña
@@ -65,25 +66,25 @@ export class CrudUsuariosComponent implements OnInit {
   submitForm() {
     const emailPattern = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
     
-    if (!emailPattern.test(this.user.email)) {
+    if (!emailPattern.test(this.user.email || '')) {
       alert("Por favor, introduce un correo electrónico válido.");
       return;
     }
-
-    if (this.user.password.length < 7) {
+  
+    if (!this.user.password || this.user.password.length < 7) {
       this.passwordErrorMessage = "La contraseña debe tener al menos 7 caracteres.";
       return;
     } else {
       this.passwordErrorMessage = '';
     }
-
+  
     if (!this.isEditMode && (!this.user.nombre || !this.user.edad || !this.user.email || !this.user.password || this.user.password !== this.confirmPassword)) {
       alert("Por favor, rellena todos los campos y asegúrate de que las contraseñas coincidan.");
       return;
     }
-
+  
     if (this.isEditMode) {
-      this.apiService.updateUsuario(this.user._id, this.user).subscribe(() => this.loadUsuarios());
+      this.apiService.updateUsuario(this.user._id || '', this.user).subscribe(() => this.loadUsuarios());
     } else {
       this.apiService.createUsuario(this.user).subscribe(() => this.loadUsuarios());
     }
@@ -91,12 +92,14 @@ export class CrudUsuariosComponent implements OnInit {
   }
 
   editUsuario(usuario: Usuario) {
+    if (!usuario) return; // Chequeo adicional
     this.user = { ...usuario };
-    this.confirmPassword = this.user.password;
+    this.confirmPassword = this.user.password || ''; // Manejo de caso `undefined`
     this.isEditMode = true;
   }
 
   deleteUsuario(id: string) {
+    if (!id) return; // Asegúrate de que `id` no sea undefined
     this.apiService.deleteUsuario(id).subscribe(() => this.loadUsuarios());
   }
 
